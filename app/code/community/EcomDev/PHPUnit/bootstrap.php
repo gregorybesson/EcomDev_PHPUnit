@@ -37,6 +37,11 @@ if (isset($_SERVER['ECOMDEV_PHPUNIT_CUSTOM_BOOTSTRAP'])) {
     include $_SERVER['ECOMDEV_PHPUNIT_CUSTOM_BOOTSTRAP'];
 }
 
+/* Fix to load vfsStream via composer */
+if (file_exists($autoload = __DIR__.'/../../../../../../../../vendor/autoload.php')) {
+    require_once $autoload;
+}
+
 if (!defined('ECOMDEV_PHPUNIT_NO_AUTOLOADER')) {
     spl_autoload_register(function ($className) {
         $filePath = strtr(
